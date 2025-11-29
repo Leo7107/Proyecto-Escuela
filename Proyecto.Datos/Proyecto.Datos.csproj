@@ -42,6 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion.cs" />
+    <Compile Include="DAsignaturas.cs" />
+    <Compile Include="DCalificaciones.cs" />
+    <Compile Include="DDocentes.cs" />
+    <Compile Include="DEstudiantes.cs" />
+    <Compile Include="DMatriculas.cs" />
+    <Compile Include="DRoles.cs" />
+    <Compile Include="DUsuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
