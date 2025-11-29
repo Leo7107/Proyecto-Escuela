@@ -22,7 +22,7 @@ namespace Sistema.Negocio
         public static DataTable BuscarPorEstudiante(int idEstudiante)
         {
             if (idEstudiante <= 0) return new DataTable();
-            DMatricula datos = new DMatriculas();
+            DMatriculas datos = new DMatriculas();
             return datos.BuscarPorEstudiante(idEstudiante);
         }
 

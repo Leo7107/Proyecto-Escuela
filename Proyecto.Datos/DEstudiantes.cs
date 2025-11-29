@@ -75,13 +75,13 @@ namespace Proyecto.Datos
             try
             {
                 SqlCon = Conexion.GetInstancia().CrearConexion();
-                SqlCommand Comando = new SqlCommand("usuario_insertar", SqlCon);
+                SqlCommand Comando = new SqlCommand("estudiante_insertar", SqlCon);
                 Comando.CommandType = CommandType.StoredProcedure;
 
                 Comando.Parameters.Add("@Nombre", SqlDbType.VarChar).Value = Obj.Nombre;
                 Comando.Parameters.Add("@Apellido", SqlDbType.VarChar).Value = Obj.Apellido;
                 Comando.Parameters.Add("@Documento", SqlDbType.VarChar).Value = Obj.Documento;
-                Comando.Parameters.Add("@FechaNacimiento", SqlDbType.Date).Value = Obj.FechaNacimiento;
+                Comando.Parameters.Add("@FechaNacimiento", SqlDbType.Date).Value = Obj.FechaNacimiento.HasValue ? (object)Obj.FechaNacimiento.Value : DBNull.Value;
                 Comando.Parameters.Add("@Direccion", SqlDbType.VarChar).Value = Obj.Direccion;
                 Comando.Parameters.Add("@Telefono", SqlDbType.VarChar).Value = Obj.Telefono;
                 Comando.Parameters.Add("@Correo", SqlDbType.VarChar).Value = Obj.Correo;
@@ -111,14 +111,14 @@ namespace Proyecto.Datos
             try
             {
                 SqlCon = Conexion.GetInstancia().CrearConexion();
-                SqlCommand Comando = new SqlCommand("usuario_actualizar", SqlCon);
+                SqlCommand Comando = new SqlCommand("estudiante_actualizar", SqlCon);
                 Comando.CommandType = CommandType.StoredProcedure;
 
                 Comando.Parameters.Add("@ID_Estudiante", SqlDbType.Int).Value = Obj.ID_Estudiante;
                 Comando.Parameters.Add("@Nombre", SqlDbType.VarChar).Value = Obj.Nombre;
                 Comando.Parameters.Add("@Apellido", SqlDbType.VarChar).Value = Obj.Apellido;
                 Comando.Parameters.Add("@Documento", SqlDbType.VarChar).Value = Obj.Documento;
-                Comando.Parameters.Add("@FechaNacimiento", SqlDbType.Date).Value = Obj.FechaNacimiento;
+                Comando.Parameters.Add("@FechaNacimiento", SqlDbType.Date).Value = Obj.FechaNacimiento.HasValue ? (object)Obj.FechaNacimiento.Value : DBNull.Value;
                 Comando.Parameters.Add("@Direccion", SqlDbType.VarChar).Value = Obj.Direccion;
                 Comando.Parameters.Add("@Telefono", SqlDbType.VarChar).Value = Obj.Telefono;
                 Comando.Parameters.Add("@Correo", SqlDbType.VarChar).Value = Obj.Correo;

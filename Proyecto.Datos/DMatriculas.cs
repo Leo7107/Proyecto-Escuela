@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace Proyecto.Datos
 {
-    public class DMariculas
+    public class DMatriculas
     {
         // Listar
         public DataTable Listar()
@@ -36,7 +36,7 @@ namespace Proyecto.Datos
             }
         }
 
-        // Buscar
+        // Buscar por texto (si tienes un SP que haga búsqueda por texto)
         public DataTable Buscar(string Valor)
         {
             SqlDataReader Resultado;
@@ -49,6 +49,37 @@ namespace Proyecto.Datos
                 SqlCommand Comando = new SqlCommand("matricula_buscar", SqlCon);
                 Comando.CommandType = CommandType.StoredProcedure;
                 Comando.Parameters.Add("@valor", SqlDbType.VarChar).Value = Valor;
+
+                SqlCon.Open();
+                Resultado = Comando.ExecuteReader();
+                Tabla.Load(Resultado);
+
+                return Tabla;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+            }
+        }
+
+        // Buscar por estudiante (nuevo método útil para el formulario)
+        public DataTable BuscarPorEstudiante(int idEstudiante)
+        {
+            SqlDataReader Resultado;
+            DataTable Tabla = new DataTable();
+            SqlConnection SqlCon = new SqlConnection();
+
+            try
+            {
+                SqlCon = Conexion.GetInstancia().CrearConexion();
+                // Ajusta el nombre del SP si tu BD usa otro
+                SqlCommand Comando = new SqlCommand("matricula_buscar_por_estudiante", SqlCon);
+                Comando.CommandType = CommandType.StoredProcedure;
+                Comando.Parameters.Add("@ID_Estudiante", SqlDbType.Int).Value = idEstudiante;
 
                 SqlCon.Open();
                 Resultado = Comando.ExecuteReader();
@@ -82,8 +113,7 @@ namespace Proyecto.Datos
                 Comando.Parameters.Add("@Asignatura", SqlDbType.Int).Value = Obj.ID_Asignatura;
                 Comando.Parameters.Add("@Año", SqlDbType.Int).Value = Obj.Año;
                 Comando.Parameters.Add("@Grado", SqlDbType.Int).Value = Obj.Grado;
-
-
+                    
                 SqlCon.Open();
                 Rpta = Comando.ExecuteNonQuery() == 1 ? "OK" : "No se pudo insertar el registro";
             }
@@ -108,7 +138,8 @@ namespace Proyecto.Datos
             try
             {
                 SqlCon = Conexion.GetInstancia().CrearConexion();
-                SqlCommand Comando = new SqlCommand("usuario_actualizar", SqlCon);
+                // Cambiado a matricula_actualizar (antes estaba usuario_actualizar)
+                SqlCommand Comando = new SqlCommand("matricula_actualizar", SqlCon);
                 Comando.CommandType = CommandType.StoredProcedure;
 
                 Comando.Parameters.Add("@ID_Matricula", SqlDbType.Int).Value = Obj.ID_Matricula;

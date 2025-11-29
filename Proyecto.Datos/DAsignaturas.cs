@@ -66,6 +66,36 @@ namespace Proyecto.Datos
             }
         }
 
+        // Buscar por Docente
+        public DataTable BuscarPorDocente(int idDocente)
+        {
+            SqlDataReader Resultado;
+            DataTable Tabla = new DataTable();
+            SqlConnection SqlCon = new SqlConnection();
+
+            try
+            {
+                SqlCon = Conexion.GetInstancia().CrearConexion();
+                SqlCommand Comando = new SqlCommand("asignatura_buscar_por_docente", SqlCon); // ajusta nombre SP si es distinto
+                Comando.CommandType = CommandType.StoredProcedure;
+                Comando.Parameters.Add("@ID_Docente", SqlDbType.Int).Value = idDocente;
+
+                SqlCon.Open();
+                Resultado = Comando.ExecuteReader();
+                Tabla.Load(Resultado);
+
+                return Tabla;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+            }
+        }
+
         // Insertar
         public string Insertar(Asignatura Obj)
         {
