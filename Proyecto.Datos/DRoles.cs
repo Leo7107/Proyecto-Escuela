@@ -79,7 +79,8 @@ namespace Proyecto.Datos
                 SqlCommand Comando = new SqlCommand("rol_insertar", SqlCon);
                 Comando.CommandType = CommandType.StoredProcedure;
 
-                Comando.Parameters.Add("@Rol", SqlDbType.VarChar).Value = Obj.NombreRol;
+                // Ajustado: el SP espera @NombreRol
+                Comando.Parameters.Add("@NombreRol", SqlDbType.VarChar).Value = Obj.NombreRol;
 
                 SqlCon.Open();
                 Rpta = Comando.ExecuteNonQuery() == 1 ? "OK" : "No se pudo insertar el registro";
@@ -109,7 +110,8 @@ namespace Proyecto.Datos
                 Comando.CommandType = CommandType.StoredProcedure;
 
                 Comando.Parameters.Add("@ID_Rol", SqlDbType.Int).Value = Obj.ID_Rol;
-                Comando.Parameters.Add("@Rol", SqlDbType.VarChar).Value = Obj.NombreRol;
+                // Ajustado: el SP espera @NombreRol
+                Comando.Parameters.Add("@NombreRol", SqlDbType.VarChar).Value = Obj.NombreRol;
 
                 SqlCon.Open();
                 Rpta = Comando.ExecuteNonQuery() == 1 ? "OK" : "No se pudo actualizar el registro";

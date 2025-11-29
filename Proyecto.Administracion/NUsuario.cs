@@ -1,6 +1,8 @@
 ﻿using Proyecto.Datos;
 using Proyecto.Entidades;
+using System;
 using System.Data;
+using System.Security.Cryptography;
 
 namespace Sistema.Negocio
 {
@@ -29,7 +31,7 @@ namespace Sistema.Negocio
             {
                 Nombre = nombre,
                 UsuarioLogin = usuarioLogin,
-                Contrasena = contrasena,
+                Contrasena = HashPassword(contrasena),
                 ID_Rol = idRol
             };
 
@@ -48,7 +50,8 @@ namespace Sistema.Negocio
                 ID_Usuario = idUsuario,
                 Nombre = nombre,
                 UsuarioLogin = usuarioLogin,
-                Contrasena = contrasena,
+                // Si se proporciona contraseña se guarda hasheada; si es null/empty, se envía null para que la capa de datos/BD decida
+                Contrasena = string.IsNullOrWhiteSpace(contrasena) ? null : HashPassword(contrasena),
                 ID_Rol = idRol
             };
 
@@ -61,6 +64,28 @@ namespace Sistema.Negocio
             if (idUsuario <= 0) return "Id de usuario inválido.";
             DUsuarios datos = new DUsuarios();
             return datos.Eliminar(idUsuario);
+        }
+
+        // Hash de contraseña con PBKDF2; formato devuelto: {iteraciones}.{saltBase64}.{hashBase64}
+        private static string HashPassword(string password)
+        {
+            if (password == null) throw new ArgumentNullException(nameof(password));
+
+            const int iterations = 10000;
+            const int saltSize = 16; // bytes
+            const int hashSize = 32; // bytes
+
+            using (var rng = new RNGCryptoServiceProvider())
+            {
+                var salt = new byte[saltSize];
+                rng.GetBytes(salt);
+
+                using (var pbkdf2 = new Rfc2898DeriveBytes(password, salt, iterations))
+                {
+                    var hash = pbkdf2.GetBytes(hashSize);
+                    return $"{iterations}.{Convert.ToBase64String(salt)}.{Convert.ToBase64String(hash)}";
+                }
+            }
         }
     }
 }

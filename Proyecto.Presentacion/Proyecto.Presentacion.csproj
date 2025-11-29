@@ -46,8 +46,80 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrmAsignaturas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAsignaturas.Designer.cs">
+      <DependentUpon>FrmAsignaturas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCalificaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCalificaciones.Designer.cs">
+      <DependentUpon>FrmCalificaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDocentes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDocentes.Designer.cs">
+      <DependentUpon>FrmDocentes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmEstudiantes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmEstudiantes.Designer.cs">
+      <DependentUpon>FrmEstudiantes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMatriculas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMatriculas.Designer.cs">
+      <DependentUpon>FrmMatriculas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPrincipal.Designer.cs">
+      <DependentUpon>FrmPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRoles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRoles.Designer.cs">
+      <DependentUpon>FrmRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUsuarios.Designer.cs">
+      <DependentUpon>FrmUsuarios.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmAsignaturas.resx">
+      <DependentUpon>FrmAsignaturas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCalificaciones.resx">
+      <DependentUpon>FrmCalificaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDocentes.resx">
+      <DependentUpon>FrmDocentes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmEstudiantes.resx">
+      <DependentUpon>FrmEstudiantes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMatriculas.resx">
+      <DependentUpon>FrmMatriculas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPrincipal.resx">
+      <DependentUpon>FrmPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmRoles.resx">
+      <DependentUpon>FrmRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUsuarios.resx">
+      <DependentUpon>FrmUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -74,6 +146,10 @@
     <ProjectReference Include="..\Proyecto.Administracion\Proyecto.Negocio.csproj">
       <Project>{83cbd03d-621b-4261-9df5-3e4009db0593}</Project>
       <Name>Proyecto.Negocio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Proyecto.Entidades\Proyecto.Entidades.csproj">
+      <Project>{637e297d-fd29-4cfe-a245-ad2b606dc4b2}</Project>
+      <Name>Proyecto.Entidades</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

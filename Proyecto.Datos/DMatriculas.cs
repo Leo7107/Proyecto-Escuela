@@ -109,8 +109,10 @@ namespace Proyecto.Datos
                 SqlCommand Comando = new SqlCommand("matricula_insertar", SqlCon);
                 Comando.CommandType = CommandType.StoredProcedure;
 
-                Comando.Parameters.Add("@Estudiante", SqlDbType.Int).Value = Obj.ID_Estudiante;
-                Comando.Parameters.Add("@Asignatura", SqlDbType.Int).Value = Obj.ID_Asignatura;
+                // Usar los nombres de parámetros que espera el SP
+                Comando.Parameters.Add("@ID_Estudiante", SqlDbType.Int).Value = Obj.ID_Estudiante;
+                Comando.Parameters.Add("@ID_Asignatura", SqlDbType.Int).Value = Obj.ID_Asignatura;
+                // Enviar exactamente @Año si el SP lo requiere
                 Comando.Parameters.Add("@Año", SqlDbType.Int).Value = Obj.Año;
                 Comando.Parameters.Add("@Grado", SqlDbType.Int).Value = Obj.Grado;
                     
@@ -138,16 +140,14 @@ namespace Proyecto.Datos
             try
             {
                 SqlCon = Conexion.GetInstancia().CrearConexion();
-                // Cambiado a matricula_actualizar (antes estaba usuario_actualizar)
                 SqlCommand Comando = new SqlCommand("matricula_actualizar", SqlCon);
                 Comando.CommandType = CommandType.StoredProcedure;
 
                 Comando.Parameters.Add("@ID_Matricula", SqlDbType.Int).Value = Obj.ID_Matricula;
-                Comando.Parameters.Add("@Estudiante", SqlDbType.Int).Value = Obj.ID_Estudiante;
-                Comando.Parameters.Add("@Asignatura", SqlDbType.Int).Value = Obj.ID_Asignatura;
+                Comando.Parameters.Add("@ID_Estudiante", SqlDbType.Int).Value = Obj.ID_Estudiante;
+                Comando.Parameters.Add("@ID_Asignatura", SqlDbType.Int).Value = Obj.ID_Asignatura;
                 Comando.Parameters.Add("@Año", SqlDbType.Int).Value = Obj.Año;
                 Comando.Parameters.Add("@Grado", SqlDbType.Int).Value = Obj.Grado;
-
 
                 SqlCon.Open();
                 Rpta = Comando.ExecuteNonQuery() == 1 ? "OK" : "No se pudo actualizar el registro";

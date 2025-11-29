@@ -105,7 +105,7 @@ namespace Proyecto.Datos
             try
             {
                 SqlCon = Conexion.GetInstancia().CrearConexion();
-                SqlCommand Comando = new SqlCommand("Asignatura_insertar", SqlCon);
+                SqlCommand Comando = new SqlCommand("asignatura_insertar", SqlCon);
                 Comando.CommandType = CommandType.StoredProcedure;
 
                 Comando.Parameters.Add("@Nombre", SqlDbType.VarChar).Value = Obj.Nombre;

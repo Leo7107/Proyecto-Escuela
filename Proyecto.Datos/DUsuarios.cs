@@ -78,10 +78,11 @@ namespace Proyecto.Datos
                 SqlCommand Comando = new SqlCommand("usuario_insertar", SqlCon);
                 Comando.CommandType = CommandType.StoredProcedure;
 
-                Comando.Parameters.Add("@Nombre", SqlDbType.VarChar).Value = Obj.Nombre;
-                Comando.Parameters.Add("@Usuario", SqlDbType.VarChar).Value = Obj.UsuarioLogin;
-                Comando.Parameters.Add("@Contraseña", SqlDbType.VarChar).Value = Obj.Contrasena;
-                Comando.Parameters.Add("@ID_Rol", SqlDbType.Int).Value = Obj.ID_Rol;
+                Comando.Parameters.Add("@Nombre", SqlDbType.VarChar).Value = Obj.Nombre ?? (object)DBNull.Value;
+                Comando.Parameters.Add("@Usuario", SqlDbType.VarChar).Value = Obj.UsuarioLogin ?? (object)DBNull.Value;
+                // El SP espera @Contraseña (con tilde); lo enviamos exactamente así
+                Comando.Parameters.Add("@Contraseña", SqlDbType.VarChar).Value = Obj.Contrasena ?? (object)DBNull.Value;
+                Comando.Parameters.Add("@ID_Rol", SqlDbType.Int).Value = Obj.ID_Rol > 0 ? (object)Obj.ID_Rol : (object)DBNull.Value;
 
                 SqlCon.Open();
                 Rpta = Comando.ExecuteNonQuery() == 1 ? "OK" : "No se pudo insertar el registro";
@@ -111,10 +112,11 @@ namespace Proyecto.Datos
                 Comando.CommandType = CommandType.StoredProcedure;
 
                 Comando.Parameters.Add("@ID_Usuario", SqlDbType.Int).Value = Obj.ID_Usuario;
-                Comando.Parameters.Add("@Nombre", SqlDbType.VarChar).Value = Obj.Nombre;
-                Comando.Parameters.Add("@Usuario", SqlDbType.VarChar).Value = Obj.UsuarioLogin;
-                Comando.Parameters.Add("@Contraseña", SqlDbType.VarChar).Value = Obj.Contrasena;
-                Comando.Parameters.Add("@ID_Rol", SqlDbType.Int).Value = Obj.ID_Rol;
+                Comando.Parameters.Add("@Nombre", SqlDbType.VarChar).Value = Obj.Nombre ?? (object)DBNull.Value;
+                Comando.Parameters.Add("@Usuario", SqlDbType.VarChar).Value = Obj.UsuarioLogin ?? (object)DBNull.Value;
+                // Si Obj.Contrasena es null o vacío enviamos DBNull para que el SP no la sobrescriba
+                Comando.Parameters.Add("@Contraseña", SqlDbType.VarChar).Value = string.IsNullOrWhiteSpace(Obj.Contrasena) ? (object)DBNull.Value : Obj.Contrasena;
+                Comando.Parameters.Add("@ID_Rol", SqlDbType.Int).Value = Obj.ID_Rol > 0 ? (object)Obj.ID_Rol : (object)DBNull.Value;
 
                 SqlCon.Open();
                 Rpta = Comando.ExecuteNonQuery() == 1 ? "OK" : "No se pudo actualizar el registro";

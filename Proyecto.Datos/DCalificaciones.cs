@@ -80,10 +80,12 @@ namespace Proyecto.Datos
 
                 Comando.Parameters.Add("@ID_Estudiante", SqlDbType.Int).Value = Obj.ID_Estudiante;
                 Comando.Parameters.Add("@ID_Asignatura", SqlDbType.Int).Value = Obj.ID_Asignatura;
-                Comando.Parameters.Add("@Nota", SqlDbType.Decimal).Value = Obj.Nota;
-                Comando.Parameters.Add("@Promedio", SqlDbType.Int).Value = Obj.Promedio;
-                Comando.Parameters.Add("@Estado", SqlDbType.Decimal).Value = Obj.Estado;
-
+                Comando.Parameters.Add("@Nota1", SqlDbType.Decimal).Value = Obj.Nota1;
+                Comando.Parameters.Add("@Nota2", SqlDbType.Decimal).Value = Obj.Nota2;
+                Comando.Parameters.Add("@Nota3", SqlDbType.Decimal).Value = Obj.Nota3;
+                Comando.Parameters.Add("@Promedio", SqlDbType.Decimal).Value = Obj.Promedio;
+                // Estado como bit: 1 = activo, 0 = inactivo
+                Comando.Parameters.Add("@Estado", SqlDbType.Bit).Value = Obj.Estado;
 
                 SqlCon.Open();
                 Rpta = Comando.ExecuteNonQuery() == 1 ? "OK" : "No se pudo insertar el registro";
@@ -109,16 +111,17 @@ namespace Proyecto.Datos
             try
             {
                 SqlCon = Conexion.GetInstancia().CrearConexion();
-                SqlCommand Comando = new SqlCommand("Calificacion_actualizar", SqlCon);
+                SqlCommand Comando = new SqlCommand("calificacion_actualizar", SqlCon);
                 Comando.CommandType = CommandType.StoredProcedure;
 
                 Comando.Parameters.Add("@ID_Calificacion", SqlDbType.Int).Value = Obj.ID_Calificacion;
                 Comando.Parameters.Add("@ID_Estudiante", SqlDbType.Int).Value = Obj.ID_Estudiante;
                 Comando.Parameters.Add("@ID_Asignatura", SqlDbType.Int).Value = Obj.ID_Asignatura;
-                Comando.Parameters.Add("@Nota", SqlDbType.Decimal).Value = Obj.Nota;
-                Comando.Parameters.Add("@Promedio", SqlDbType.Int).Value = Obj.Promedio;
-                Comando.Parameters.Add("@Estado", SqlDbType.Decimal).Value = Obj.Estado;
-
+                Comando.Parameters.Add("@Nota1", SqlDbType.Decimal).Value = Obj.Nota1;
+                Comando.Parameters.Add("@Nota2", SqlDbType.Decimal).Value = Obj.Nota2;
+                Comando.Parameters.Add("@Nota3", SqlDbType.Decimal).Value = Obj.Nota3;
+                Comando.Parameters.Add("@Promedio", SqlDbType.Decimal).Value = Obj.Promedio;
+                Comando.Parameters.Add("@Estado", SqlDbType.Bit).Value = Obj.Estado;
 
                 SqlCon.Open();
                 Rpta = Comando.ExecuteNonQuery() == 1 ? "OK" : "No se pudo actualizar el registro";
