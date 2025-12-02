@@ -66,7 +66,7 @@ namespace Proyecto.Presentacion
             {
                 DataTable dt = NAsignatura.Listar();
                 if (dt.Columns.Contains("Nombre")) cmbAsignatura.DisplayMember = "Nombre";
-                if (dt.Columns.Contains("ID_Docente")) { /* keep column for doc lookup */ }
+                if (dt.Columns.Contains("ID_Docente")) { }
                 cmbAsignatura.ValueMember = dt.Columns.Contains("ID_Asignatura") ? "ID_Asignatura" : dt.Columns[0].ColumnName;
                 cmbAsignatura.DataSource = dt;
             }
@@ -82,7 +82,7 @@ namespace Proyecto.Presentacion
             {
                 DataTable dt = NMatricula.Listar();
 
-                // Añadir NombreEstudiante y NombreDocente para mejor UX (si no los devuelve el SP)
+                // Añadir NombreEstudiante y NombreDocente para mejor UX 
                 DataTable dtEst = NEstudiante.Listar();
                 DataTable dtAsig = NAsignatura.Listar();
                 DataTable dtDoc = NDocente.Listar();

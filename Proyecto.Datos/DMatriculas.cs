@@ -36,7 +36,7 @@ namespace Proyecto.Datos
             }
         }
 
-        // Buscar por texto (si tienes un SP que haga búsqueda por texto)
+        // Buscar por texto
         public DataTable Buscar(string Valor)
         {
             SqlDataReader Resultado;
@@ -76,7 +76,6 @@ namespace Proyecto.Datos
             try
             {
                 SqlCon = Conexion.GetInstancia().CrearConexion();
-                // Ajusta el nombre del SP si tu BD usa otro
                 SqlCommand Comando = new SqlCommand("matricula_buscar_por_estudiante", SqlCon);
                 Comando.CommandType = CommandType.StoredProcedure;
                 Comando.Parameters.Add("@ID_Estudiante", SqlDbType.Int).Value = idEstudiante;
@@ -109,10 +108,9 @@ namespace Proyecto.Datos
                 SqlCommand Comando = new SqlCommand("matricula_insertar", SqlCon);
                 Comando.CommandType = CommandType.StoredProcedure;
 
-                // Usar los nombres de parámetros que espera el SP
+            
                 Comando.Parameters.Add("@ID_Estudiante", SqlDbType.Int).Value = Obj.ID_Estudiante;
                 Comando.Parameters.Add("@ID_Asignatura", SqlDbType.Int).Value = Obj.ID_Asignatura;
-                // Enviar exactamente @Año si el SP lo requiere
                 Comando.Parameters.Add("@Año", SqlDbType.Int).Value = Obj.Año;
                 Comando.Parameters.Add("@Grado", SqlDbType.Int).Value = Obj.Grado;
                     

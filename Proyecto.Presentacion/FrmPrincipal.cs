@@ -96,5 +96,10 @@ namespace Proyecto.Presentacion
         {
             Application.Exit();
         }
+
+        private void archivoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
