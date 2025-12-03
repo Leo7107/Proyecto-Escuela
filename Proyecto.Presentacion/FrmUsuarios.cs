@@ -87,8 +87,8 @@ namespace Proyecto.Presentacion
             btnGuardar.Enabled = activo;
             btnCancelar.Enabled = activo;
             btnNuevo.Enabled = !activo;
-            btnEditar.Enabled = !activo;
-            btnEliminar.Enabled = !activo;
+            //btnEditar.Enabled = !activo;
+            btnEliminar.Enabled = activo;
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)

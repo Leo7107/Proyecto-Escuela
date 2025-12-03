@@ -89,10 +89,10 @@
             // mantenimientoToolStripMenuItem
             // 
             this.mantenimientoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.usuariosToolStripMenuItem,
             this.rolesToolStripMenuItem,
-            this.estudiantesToolStripMenuItem,
             this.docentesToolStripMenuItem,
+            this.estudiantesToolStripMenuItem,
+            this.usuariosToolStripMenuItem,
             this.asignaturasToolStripMenuItem,
             this.matriculasToolStripMenuItem,
             this.calificacionesToolStripMenuItem});
@@ -163,28 +163,28 @@
             // cascadeToolStripMenuItem
             // 
             this.cascadeToolStripMenuItem.Name = "cascadeToolStripMenuItem";
-            this.cascadeToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.cascadeToolStripMenuItem.Size = new System.Drawing.Size(265, 34);
             this.cascadeToolStripMenuItem.Text = "Cascada";
             this.cascadeToolStripMenuItem.Click += new System.EventHandler(this.cascadeToolStripMenuItem_Click);
             // 
             // tileHorizontalToolStripMenuItem
             // 
             this.tileHorizontalToolStripMenuItem.Name = "tileHorizontalToolStripMenuItem";
-            this.tileHorizontalToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.tileHorizontalToolStripMenuItem.Size = new System.Drawing.Size(265, 34);
             this.tileHorizontalToolStripMenuItem.Text = "Mosaico horizontal";
             this.tileHorizontalToolStripMenuItem.Click += new System.EventHandler(this.tileHorizontalToolStripMenuItem_Click);
             // 
             // tileVerticalToolStripMenuItem
             // 
             this.tileVerticalToolStripMenuItem.Name = "tileVerticalToolStripMenuItem";
-            this.tileVerticalToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.tileVerticalToolStripMenuItem.Size = new System.Drawing.Size(265, 34);
             this.tileVerticalToolStripMenuItem.Text = "Mosaico vertical";
             this.tileVerticalToolStripMenuItem.Click += new System.EventHandler(this.tileVerticalToolStripMenuItem_Click);
             // 
             // cerrarTodoToolStripMenuItem
             // 
             this.cerrarTodoToolStripMenuItem.Name = "cerrarTodoToolStripMenuItem";
-            this.cerrarTodoToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.cerrarTodoToolStripMenuItem.Size = new System.Drawing.Size(265, 34);
             this.cerrarTodoToolStripMenuItem.Text = "Cerrar todo";
             this.cerrarTodoToolStripMenuItem.Click += new System.EventHandler(this.cerrarTodoToolStripMenuItem_Click);
             // 

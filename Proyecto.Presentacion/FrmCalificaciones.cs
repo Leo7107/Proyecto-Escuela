@@ -78,50 +78,63 @@ namespace Proyecto.Presentacion
             {
                 DataTable dt = NCalificacion.Listar();
 
-                // Si el SP devuelve Nota1/2/3 y Promedio, los mostramos.
-                if (!dt.Columns.Contains("Notas")) dt.Columns.Add("Notas", typeof(string));
-                if (!dt.Columns.Contains("NombreEstudiante"))
-                {
-                    DataTable dtEst = NEstudiante.Listar();
-                    dt.Columns.Add("NombreEstudiante", typeof(string));
-                    foreach (DataRow r in dt.Rows)
-                    {
-                        var idEstObj = r["ID_Estudiante"] ?? r["IDEstudiante"];
-                        if (idEstObj != null && int.TryParse(idEstObj.ToString(), out int idEst))
-                        {
-                            var found = dtEst.AsEnumerable().FirstOrDefault(x => x["ID_Estudiante"].ToString() == idEst.ToString());
-                            if (found != null)
-                                r["NombreEstudiante"] = (found.Table.Columns.Contains("NombreCompleto") ? found["NombreCompleto"] : (found.Table.Columns.Contains("Nombre") ? found["Nombre"].ToString() + " " + (found.Table.Columns.Contains("Apellido") ? found["Apellido"].ToString() : "") : ""));
-                        }
+                DataTable dtEst = NEstudiante.Listar();
+                DataTable dtAsig = NAsignatura.Listar();
+                DataTable dtDoc = NDocente.Listar();
 
-                        // Formar columna Notas: preferimos mostrar Nota1,Nota2,Nota3 si existen
-                        if (dt.Columns.Contains("Nota1") && dt.Columns.Contains("Nota2") && dt.Columns.Contains("Nota3"))
+                if (!dt.Columns.Contains("NombreEstudiante"))
+                    dt.Columns.Add("NombreEstudiante", typeof(string));
+
+                if (!dt.Columns.Contains("NombreDocente"))
+                    dt.Columns.Add("NombreDocente", typeof(string));
+
+                foreach (DataRow r in dt.Rows)
+                {
+                    var idEstObj = r["ID_Estudiante"] ?? r["IDEstudiante"];
+                    if (idEstObj != null && int.TryParse(idEstObj.ToString(), out int idEst))
+                    {
+                        var foundEst = dtEst.AsEnumerable().FirstOrDefault(x => x["ID_Estudiante"].ToString() == idEst.ToString());
+                        if (foundEst != null)
                         {
-                            r["Notas"] = string.Format("{0},{1},{2}",
-                                decimal.TryParse(r["Nota1"]?.ToString(), out decimal a) ? a.ToString("0.00") : "0.00",
-                                decimal.TryParse(r["Nota2"]?.ToString(), out decimal b) ? b.ToString("0.00") : "0.00",
-                                decimal.TryParse(r["Nota3"]?.ToString(), out decimal c) ? c.ToString("0.00") : "0.00");
+                            r["NombreEstudiante"] = foundEst.Table.Columns.Contains("NombreCompleto")
+                                ? foundEst["NombreCompleto"]
+                                : (foundEst.Table.Columns.Contains("Nombre")
+                                    ? foundEst["Nombre"].ToString() + " " + (foundEst.Table.Columns.Contains("Apellido") ? foundEst["Apellido"].ToString() : "")
+                                    : "");
                         }
-                        else if (r.Table.Columns.Contains("Promedio"))
+                    }
+                    var idAsigObj = r["ID_Asignatura"] ?? r["IDAsignatura"];
+                    if (idAsigObj != null && int.TryParse(idAsigObj.ToString(), out int idAsig))
+                    {
+                        var foundAsig = dtAsig.AsEnumerable().FirstOrDefault(x => x["ID_Asignatura"].ToString() == idAsig.ToString());
+                        if (foundAsig != null)
                         {
-                            r["Notas"] = r["Promedio"]?.ToString() ?? "";
-                        }
-                        else
-                        {
-                            r["Notas"] = "";
+                            if (foundAsig.Table.Columns.Contains("ID_Docente") &&
+                                int.TryParse(foundAsig["ID_Docente"]?.ToString(), out int idDoc))
+                            {
+                                var foundDoc = dtDoc.AsEnumerable().FirstOrDefault(d => d["ID_Docente"].ToString() == idDoc.ToString());
+                                if (foundDoc != null)
+                                {
+                                    r["NombreDocente"] =
+                                        foundDoc.Table.Columns.Contains("Nombre")
+                                        ? foundDoc["Nombre"].ToString() + " " +
+                                          (foundDoc.Table.Columns.Contains("Apellido") ? foundDoc["Apellido"].ToString() : "")
+                                        : foundDoc[0].ToString();
+                                }
+                            }
                         }
                     }
                 }
-
                 dgvCalificaciones.DataSource = dt;
-
                 // ordenar columnas: ID, NombreEstudiante, ID_Asignatura, Notas, Promedio, Estado
+                if (dgvCalificaciones.Columns["NombreDocente"] != null) dgvCalificaciones.Columns["NombreDocente"].DisplayIndex = 3;
                 if (dgvCalificaciones.Columns["ID_Calificacion"] != null) dgvCalificaciones.Columns["ID_Calificacion"].DisplayIndex = 0;
-                if (dgvCalificaciones.Columns["NombreEstudiante"] != null) dgvCalificaciones.Columns["NombreEstudiante"].DisplayIndex = 1;
+                if (dgvCalificaciones.Columns["NombreEstudiante"] != null) dgvCalificaciones.Columns["NombreEstudiante"].DisplayIndex = 4;
                 if (dgvCalificaciones.Columns["ID_Asignatura"] != null) dgvCalificaciones.Columns["ID_Asignatura"].DisplayIndex = 2;
-                if (dgvCalificaciones.Columns["Notas"] != null) dgvCalificaciones.Columns["Notas"].DisplayIndex = 3;
-                if (dgvCalificaciones.Columns["Promedio"] != null) dgvCalificaciones.Columns["Promedio"].DisplayIndex = 4;
-                if (dgvCalificaciones.Columns["Estado"] != null) dgvCalificaciones.Columns["Estado"].DisplayIndex = 5;
+                if (dgvCalificaciones.Columns["Notas"] != null) dgvCalificaciones.Columns["Notas"].DisplayIndex = 1;
+                if (dgvCalificaciones.Columns["Promedio"] != null) dgvCalificaciones.Columns["Promedio"].DisplayIndex = 5;
+                if (dgvCalificaciones.Columns["Estado"] != null) dgvCalificaciones.Columns["Estado"].DisplayIndex = 3;
+
             }
             catch (Exception ex)
             {
@@ -158,8 +171,8 @@ namespace Proyecto.Presentacion
             btnGuardar.Enabled = activo;
             btnCancelar.Enabled = activo;
             btnNuevo.Enabled = !activo;
-            btnEditar.Enabled = !activo;
-            btnEliminar.Enabled = !activo;
+            //btnEditar.Enabled = !activo;
+            btnEliminar.Enabled = activo;
         }
 
         private decimal CalcularPromedio(decimal a, decimal b, decimal c)
@@ -299,7 +312,6 @@ namespace Proyecto.Presentacion
                 MessageBox.Show("Seleccione un registro para eliminar (doble clic en la grilla).");
                 return;
             }
-
             if (MessageBox.Show("¿Eliminar la calificación seleccionada?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 try

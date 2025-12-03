@@ -158,8 +158,8 @@ namespace Proyecto.Presentacion
             btnGuardar.Enabled = activo;
             btnCancelar.Enabled = activo;
             btnNuevo.Enabled = !activo;
-            btnEditar.Enabled = !activo;
-            btnEliminar.Enabled = !activo;
+            //btnEditar.Enabled = !activo;
+            btnEliminar.Enabled = activo;
         }
 
         // Helper para obtener int del SelectedValue (DataRowView / string / int)
@@ -289,6 +289,11 @@ namespace Proyecto.Presentacion
                     MessageBox.Show("Error eliminando matrícula: " + ex.Message);
                 }
             }
+        }
+
+        private void dgvMatriculas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

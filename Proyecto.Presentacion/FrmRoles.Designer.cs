@@ -36,7 +36,6 @@
             this.txtRol = new System.Windows.Forms.TextBox();
             this.btnNuevo = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
-            this.btnEditar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.txtBuscar = new System.Windows.Forms.TextBox();
@@ -48,13 +47,14 @@
             // dgvRoles
             // 
             this.dgvRoles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-                                   | System.Windows.Forms.AnchorStyles.Left) 
-                                   | System.Windows.Forms.AnchorStyles.Right)));
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvRoles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRoles.Location = new System.Drawing.Point(12, 200);
+            this.dgvRoles.Location = new System.Drawing.Point(12, 199);
             this.dgvRoles.MultiSelect = false;
             this.dgvRoles.Name = "dgvRoles";
             this.dgvRoles.ReadOnly = true;
+            this.dgvRoles.RowHeadersWidth = 62;
             this.dgvRoles.RowTemplate.Height = 24;
             this.dgvRoles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvRoles.Size = new System.Drawing.Size(760, 300);
@@ -79,7 +79,7 @@
             this.lblId.AutoSize = true;
             this.lblId.Location = new System.Drawing.Point(16, 28);
             this.lblId.Name = "lblId";
-            this.lblId.Size = new System.Drawing.Size(24, 17);
+            this.lblId.Size = new System.Drawing.Size(26, 20);
             this.lblId.TabIndex = 0;
             this.lblId.Text = "ID";
             // 
@@ -88,7 +88,7 @@
             this.txtId.Location = new System.Drawing.Point(120, 25);
             this.txtId.Name = "txtId";
             this.txtId.ReadOnly = true;
-            this.txtId.Size = new System.Drawing.Size(120, 22);
+            this.txtId.Size = new System.Drawing.Size(120, 26);
             this.txtId.TabIndex = 1;
             // 
             // lblRol
@@ -96,7 +96,7 @@
             this.lblRol.AutoSize = true;
             this.lblRol.Location = new System.Drawing.Point(16, 62);
             this.lblRol.Name = "lblRol";
-            this.lblRol.Size = new System.Drawing.Size(31, 17);
+            this.lblRol.Size = new System.Drawing.Size(33, 20);
             this.lblRol.TabIndex = 2;
             this.lblRol.Text = "Rol";
             // 
@@ -104,7 +104,7 @@
             // 
             this.txtRol.Location = new System.Drawing.Point(120, 59);
             this.txtRol.Name = "txtRol";
-            this.txtRol.Size = new System.Drawing.Size(380, 22);
+            this.txtRol.Size = new System.Drawing.Size(380, 26);
             this.txtRol.TabIndex = 3;
             // 
             // btnNuevo
@@ -127,19 +127,9 @@
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // btnEditar
-            // 
-            this.btnEditar.Location = new System.Drawing.Point(660, 60);
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(100, 35);
-            this.btnEditar.TabIndex = 6;
-            this.btnEditar.Text = "Editar";
-            this.btnEditar.UseVisualStyleBackColor = true;
-            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
-            // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(660, 100);
+            this.btnEliminar.Location = new System.Drawing.Point(656, 60);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(100, 35);
             this.btnEliminar.TabIndex = 7;
@@ -149,9 +139,9 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(550, 140);
+            this.btnCancelar.Location = new System.Drawing.Point(656, 100);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(210, 35);
+            this.btnCancelar.Size = new System.Drawing.Size(104, 35);
             this.btnCancelar.TabIndex = 8;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -161,7 +151,7 @@
             // 
             this.txtBuscar.Location = new System.Drawing.Point(12, 15);
             this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(520, 22);
+            this.txtBuscar.Size = new System.Drawing.Size(520, 26);
             this.txtBuscar.TabIndex = 9;
             // 
             // btnBuscar
@@ -181,7 +171,6 @@
             this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnEliminar);
-            this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnNuevo);
             this.Controls.Add(this.groupBoxDatos);
@@ -207,7 +196,6 @@
         private System.Windows.Forms.TextBox txtRol;
         private System.Windows.Forms.Button btnNuevo;
         private System.Windows.Forms.Button btnGuardar;
-        private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.TextBox txtBuscar;
