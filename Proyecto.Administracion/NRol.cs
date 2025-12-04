@@ -47,12 +47,12 @@ namespace Sistema.Negocio
             return datos.Actualizar(obj);
         }
 
-        public static string Eliminar(int idRol)
+        public static string Eliminar(int id_Rol)
         {
-            if (idRol <= 0) return "Id de rol inválido.";
+            if (id_Rol <= 0) return "Id de rol inválido.";
 
             DRoles datos = new DRoles();
-            return datos.Eliminar(idRol);
+            return datos.Eliminar(id_Rol);
         }
     }
 }
